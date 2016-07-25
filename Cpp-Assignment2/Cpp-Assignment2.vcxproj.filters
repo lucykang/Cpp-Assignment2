@@ -16,6 +16,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="highScore.dat">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -24,12 +27,18 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HighScoreManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cpp-Assignment2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HighScoreManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
