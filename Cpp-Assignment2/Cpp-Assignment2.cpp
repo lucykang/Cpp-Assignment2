@@ -3,24 +3,37 @@
 #pragma warning(disable : 4996)
 #include "stdafx.h"
 #include "HighScoreManager.h"
+#include "UserManager.h"
 #include <iostream>
 
 using namespace std;
 
-int main()
-{
-	string username;
+int main() {
+	UserManager userManager;
+	char username[20];
+
 	//login logic comes here and replace with the code below.
 	cout << "Please enter your username: ";
-	getline(cin, username);
+	cin >> username; cin.ignore();
+	//getline(cin, username);
 	//I think we can check the length of username when they are loggin in.
 	//date will always have the same format and automatically generated.
+
+	userManager.login(username);
+	
+	if (userManager.userExists()) {
+		std::cout << "Welcome back " << username << std::endl;
+	}
+	else {
+		std::cout << "It's nice to meet you " << username << std::endl;
+		userManager.updateUserList(); // save the new user
+	}
 
 	bool scoreMenu = true;
 	do {
 		int scoreMenuOption;
-		cout << "\nScore Manager Main Menu" << endl << "[1] Create an Record\n[2] Update a Score\n[3] View Top 10\n[4] Exit\n" << endl 
-			 << "Your Option: ";
+
+		userManager.printUserMenu();
 		cin >> scoreMenuOption;
 
 		switch (scoreMenuOption) {
@@ -60,6 +73,33 @@ int main()
 			break;
 		}
 		case 4:
+			userManager.printUserInfo();
+			break;
+		case 5: {
+			int age;
+			std::cout << "Enter your new Age: ";
+			cin >> age; cin.ignore();
+
+			char gender;
+			std::cout << "Enter your Gender (M/F): ";
+			cin >> gender; cin.ignore();
+
+			char country[20];
+			std::cout << "Enter your Country: ";
+			cin >> country; cin.ignore();
+
+			userManager.updateUserInfo(age, gender, country);
+			userManager.updateUserList(); // save the changes
+
+			break;
+		}
+		case 6:
+			userManager.deleteUser();
+			userManager.updateUserList();
+
+			scoreMenu = false;
+			break;
+		case 7:
 			scoreMenu = false; //go back to program main menu
 			break;
 		default:
