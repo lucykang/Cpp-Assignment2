@@ -82,7 +82,12 @@ void HighScoreManager::update() {
 
 bool HighScoreManager::remove() {
 	for (int i = 0; i < scoreList.size(); i++) {
-		if (scoreList[i].username == newUserScore.username) {
+		std::cout << scoreList[i].username << " - " << newUserScore.username << std::endl;
+		//if (scoreList[i].username == newUserScore.username) {
+		if (std::strcmp(scoreList[i].username, newUserScore.username) == 0) {
+
+			std::cout << "Found a match!!" << std::endl;
+
 			scoreList.erase(scoreList.begin() + i);
 			return true;
 			break;
