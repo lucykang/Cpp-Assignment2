@@ -27,6 +27,7 @@ int main() {
 		userManager.updateUserList(); // save the new user
 	}
 
+	// display menu while scoreMenu is true
 	bool scoreMenu = true;
 	do {
 		int scoreMenuOption;
@@ -35,11 +36,11 @@ int main() {
 		cin >> scoreMenuOption;
 
 		switch (scoreMenuOption) {
+		// if the user wants to set their score
 		case 1: {
 			double score;
 			cout << "\nPlease enter your score: ";
-			cin >> score;
-			cin.get();
+			cin >> score; cin.ignore();
 
 			//create a scoremanager object
 			HighScoreManager *userScore = new HighScoreManager(username, score);
@@ -49,6 +50,7 @@ int main() {
 			scoreMenu = true;
 			break;
 		}
+		// prints out the top 10 users scores
 		case 2: {
 			HighScoreManager *userScore = new HighScoreManager();//not initialising vector for now
 			userScore->print();
@@ -57,9 +59,11 @@ int main() {
 			scoreMenu = true; //going back to score manager main menu
 			break;
 		}
+		// displays the user's information to the screen
 		case 3:
 			userManager.printUserInfo();
 			break;
+		// updates the user's information
 		case 4: {
 			int age;
 			std::cout << "Enter your new Age: ";
@@ -78,13 +82,14 @@ int main() {
 
 			break;
 		}
+		// Deletes the users account 
 		case 5:
 			userManager.deleteUser();
 			userManager.updateUserList();
 
 			std::cout << "Your account has been deleted! Bye bye!" << std::endl;
 
-			scoreMenu = false;
+			scoreMenu = false; // exit out of the menu
 			break;
 		case 6:
 			scoreMenu = false; //go back to program main menu
