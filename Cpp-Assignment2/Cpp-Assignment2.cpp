@@ -97,6 +97,8 @@ int main() {
 			userManager.deleteUser();
 			userManager.updateUserList();
 
+			std::cout << "Your account has been deleted! Bye bye!" << std::endl;
+
 			scoreMenu = false;
 			break;
 		case 7:

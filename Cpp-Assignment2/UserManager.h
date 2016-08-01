@@ -11,8 +11,6 @@ private:
 	};
 	User currentUser{ "DoesntExist" };
 public:
-	UserManager();
-	~UserManager();
 	void login(char *);
 	void updateUserList();
 	void updateUserInfo(int age, char gender, char* country);
