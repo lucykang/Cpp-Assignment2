@@ -24,6 +24,8 @@ public:
 	HighScoreManager();
 	HighScoreManager(string, double);
 	~HighScoreManager();
+	void setScore();
+	bool hasRecord();
 	void add();
 	void update();
 	bool remove();
@@ -52,25 +54,22 @@ HighScoreManager::HighScoreManager(string username, double score) {
 //destructor
 HighScoreManager::~HighScoreManager() {}
 
+// a general method that detmines what to do when setting a score
+void HighScoreManager::setScore() {
+	if (hasRecord()) update();
+	else add();
+}
+
+// adds a new record 
 void HighScoreManager::add() {
 	scoreList.push_back(newUserScore);
 	sortVector();
 	save();
 }
 
+// updates a previous record
 void HighScoreManager::update() {
-
-
-	//testing username and vector
-	cout << "testing username: " << newUserScore.username << endl;
-	cout << "testing vector before update" << endl;
-	for (int i = 0; i < scoreList.size(); i++) {
-		cout << scoreList[i].username << scoreList[i].score << endl;
-	}
-
-
-
-	int index = 0;
+	// if successfully deleted then add the new one back to the vector
 	if (remove() == true) {
 		add(); //add to the vector and save it
 		cout << "\nScore is updated." << endl;
@@ -80,14 +79,20 @@ void HighScoreManager::update() {
 	}
 }
 
+// checks whether a record for the current user exists
+bool HighScoreManager::hasRecord() {
+	for (UserScore us : scoreList) {
+		if (std::strcmp(us.username, newUserScore.username) == 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
+// removes the record from the existing user
 bool HighScoreManager::remove() {
 	for (int i = 0; i < scoreList.size(); i++) {
-		std::cout << scoreList[i].username << " - " << newUserScore.username << std::endl;
-		//if (scoreList[i].username == newUserScore.username) {
 		if (std::strcmp(scoreList[i].username, newUserScore.username) == 0) {
-
-			std::cout << "Found a match!!" << std::endl;
-
 			scoreList.erase(scoreList.begin() + i);
 			return true;
 			break;
@@ -96,6 +101,7 @@ bool HighScoreManager::remove() {
 	return false;
 }
 
+// prints out the top 10 users in the file
 void HighScoreManager::print() {
 	ifstream inScoreFile(SCORE_FILE); //read from file
 	if (!inScoreFile.is_open()) {
@@ -116,6 +122,7 @@ void HighScoreManager::print() {
 	inScoreFile.close();
 }
 
+// writes all the records in the vector out to a file
 void HighScoreManager::save() {
 	ofstream outScoreFile(SCORE_FILE, ios::trunc, ios::binary);
 
@@ -133,6 +140,7 @@ void HighScoreManager::save() {
 	}
 }
 
+// reads the entire file and stores the records into a vector
 void HighScoreManager::initialiseVector() {
 	//initialise vector from the file when an object is created
 	ifstream inScoreFile(SCORE_FILE); //read from file
@@ -150,6 +158,7 @@ void HighScoreManager::initialiseVector() {
 	inScoreFile.close();
 }
 
+// this method sorts the vector based on score of the user
 void HighScoreManager::sortVector()
 {
 	int startScan, maxIndex, size;
@@ -174,6 +183,7 @@ void HighScoreManager::sortVector()
 	}
 }
 
+// returns a timestamp of the current time
 string HighScoreManager::setTime() {
 	//initialise date when user entered into score manager main menu
 	time_t rawtime;

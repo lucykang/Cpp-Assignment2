@@ -15,10 +15,8 @@ int main() {
 	//login logic comes here and replace with the code below.
 	cout << "Please enter your username: ";
 	cin >> username; cin.ignore();
-	//getline(cin, username);
-	//I think we can check the length of username when they are loggin in.
-	//date will always have the same format and automatically generated.
 
+	// log the user in and display their welcome message
 	userManager.login(username);
 	
 	if (userManager.userExists()) {
@@ -45,26 +43,13 @@ int main() {
 
 			//create a scoremanager object
 			HighScoreManager *userScore = new HighScoreManager(username, score);
-			userScore->add(); //save the object in the file
+			userScore->setScore(); //save the object in the file
 			delete userScore; //delete memory
 
 			scoreMenu = true;
 			break;
 		}
 		case 2: {
-			double score;
-			cout << "\nPlease enter score to update: ";
-			cin >> score;
-			
-			//save it in the file with updated score
-			HighScoreManager *userScore = new HighScoreManager(username, score);
-			userScore->update();
-			delete userScore;
-
-			scoreMenu = true;
-			break;
-		}
-		case 3: {
 			HighScoreManager *userScore = new HighScoreManager();//not initialising vector for now
 			userScore->print();
 			delete userScore;
@@ -72,10 +57,10 @@ int main() {
 			scoreMenu = true; //going back to score manager main menu
 			break;
 		}
-		case 4:
+		case 3:
 			userManager.printUserInfo();
 			break;
-		case 5: {
+		case 4: {
 			int age;
 			std::cout << "Enter your new Age: ";
 			cin >> age; cin.ignore();
@@ -93,7 +78,7 @@ int main() {
 
 			break;
 		}
-		case 6:
+		case 5:
 			userManager.deleteUser();
 			userManager.updateUserList();
 
@@ -101,7 +86,7 @@ int main() {
 
 			scoreMenu = false;
 			break;
-		case 7:
+		case 6:
 			scoreMenu = false; //go back to program main menu
 			break;
 		default:

@@ -76,13 +76,12 @@ void UserManager::updateUserInfo(int age, char gender, char* country) {
 void UserManager::printUserMenu() {
 	// we can through in some logic later to detect if user already has a record
 	std::cout << "Score Manager Main Menu" << std::endl
-		<< "[1] Create an Record" << std::endl
-		<< "[2] Update a Score" << std::endl
-		<< "[3] View Top 10" << std::endl
-		<< "[4] View User Info" << std::endl
-		<< "[5] Update User Info" << std::endl
-		<< "[6] Delete This User" << std::endl
-		<< "[7] Exit" << std::endl << std::endl
+		<< "[1] Set/Update your score" << std::endl
+		<< "[2] View Top 10" << std::endl
+		<< "[3] View User Info" << std::endl
+		<< "[4] Update User Info" << std::endl
+		<< "[5] Delete This User" << std::endl
+		<< "[6] Exit" << std::endl << std::endl
 		<< "Your Option: ";
 }
 
